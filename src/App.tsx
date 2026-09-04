@@ -2,7 +2,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Environment, Float, Stars, ContactShadows } from '@react-three/drei';
 import { Suspense, useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
-import { resumeData } from './data';
+import { resumeData, expYears } from './data';
 import { motion } from 'framer-motion';
 
 function BackgroundGeometries() {
@@ -100,9 +100,14 @@ function App() {
           <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500 tracking-tighter mb-4">
             {resumeData.name}
           </h1>
-          <p className="text-xl md:text-2xl font-bold text-sky-200 tracking-wide uppercase mb-6">
-            {resumeData.title}
-          </p>
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            <p className="text-xl md:text-2xl font-bold text-sky-200 tracking-wide">
+              {resumeData.title}
+            </p>
+            <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-500/10 border border-sky-400/30 text-sky-300 shadow-sm">
+              {expYears}+ Years Exp
+            </span>
+          </div>
           <p className="text-slate-300 text-lg leading-relaxed max-w-3xl glass-panel p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl">
             {resumeData.about}
           </p>
@@ -306,7 +311,10 @@ function App() {
               ✕
             </button>
             <h3 className="text-3xl font-black text-white mb-2 pr-8">{selectedExp.role}</h3>
-            <div className="text-xl text-blue-400 font-semibold mb-6">{selectedExp.company}</div>
+            <div className="text-xl text-blue-400 font-semibold mb-1">{selectedExp.company}</div>
+            {selectedExp.description && (
+              <p className="text-sm text-slate-400 mb-6">{selectedExp.description}</p>
+            )}
             
             <div className="flex items-center gap-4 mb-8">
               <span className="text-sm text-slate-300 font-mono bg-slate-800 px-3 py-1 rounded-md">📅 {selectedExp.period}</span>
